@@ -66,7 +66,7 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 
 			// Method 1: Check the view type - Obsidian uses "release-notes" for this
 			// This is the most reliable method
-			const viewType = leaf.view?.getViewType();
+			const viewType = leaf.view.getViewType();
 			if (viewType === "release-notes") {
 				return true;
 			}
@@ -80,7 +80,7 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 
 			// Method 3: Check the container element for the specific changelog link
 			// This is specific to Obsidian's release notes page
-			const containerEl = leaf.view?.containerEl;
+			const containerEl = leaf.view.containerEl;
 			if (containerEl) {
 				// Look for the changelog link that's specific to release notes
 				const changelogLink = containerEl.querySelector(

@@ -1,6 +1,6 @@
 {
 	"name": "release-notes-closer",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Automatically closes the release notes tab that opens after Obsidian updates.",
 	"main": "main.js",
 	"scripts": {

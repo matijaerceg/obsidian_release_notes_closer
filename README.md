@@ -22,7 +22,7 @@ When a release notes tab is detected, it's automatically closed.
 ### Manual Installation
 
 1. Download the latest release from the releases page
-2. Extract the files into your vault's `.obsidian/plugins/` folder
+2. Extract the files into your vault's `.obsidian/plugins/release-notes-closer` folder
 3. Reload Obsidian
 4. Enable the plugin in Settings → Community plugins
 

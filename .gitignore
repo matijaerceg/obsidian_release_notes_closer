@@ -1,5 +1,6 @@
 # Build artifacts
 main.js
+*.zip
 
 # npm
 node_modules

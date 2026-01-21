@@ -16,6 +16,8 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 		// Check existing leaves on startup (in case plugin loads after release notes opened)
 		this.app.workspace.onLayoutReady(() => {
 			this.closeReleaseNotesLeaves();
+			// Secondary check after a delay in case release notes opens slightly after layout ready
+			setTimeout(() => this.closeReleaseNotesLeaves(), 500);
 		});
 
 		// Listen for new leaves being created
@@ -57,6 +59,11 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 
 	private isReleaseNotesLeaf(leaf: WorkspaceLeaf): boolean {
 		try {
+			// Early return if leaf or view is invalid
+			if (!leaf || !leaf.view) {
+				return false;
+			}
+
 			// Method 1: Check the view type - Obsidian uses "release-notes" for this
 			// This is the most reliable method
 			const viewType = leaf.view?.getViewType();
@@ -67,7 +74,7 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 			// Method 2: Check display text in the tab header
 			// Release notes tab shows "Release Notes [version]" pattern (e.g., "Release Notes 1.5.0")
 			const displayText = leaf.getDisplayText();
-			if (displayText && /^Release Notes\s+\d+\.\d+/i.test(displayText)) {
+			if (displayText && /^Release Notes\s+\d+\.\d+\.\d+/i.test(displayText)) {
 				return true;
 			}
 

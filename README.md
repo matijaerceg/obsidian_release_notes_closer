@@ -1,4 +1,4 @@
-# Release Notes Closer
+# Release Notes Closer for Obsidian.md
 
 An Obsidian plugin that automatically closes the release notes tab that opens after Obsidian updates.
 

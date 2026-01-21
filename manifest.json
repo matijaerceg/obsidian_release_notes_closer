@@ -1,10 +1,10 @@
 {
 	"id": "release-notes-closer",
 	"name": "Release Notes Closer",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Automatically closes the release notes tab that opens after Obsidian updates.",
 	"author": "Matija Erceg",
-	"authorUrl": "",
+	"authorUrl": "https://github.com/matijaerceg",
 	"isDesktopOnly": false
 }

@@ -1,7 +1,14 @@
-import { Plugin, WorkspaceLeaf } from "obsidian";
+import { Plugin, WorkspaceLeaf, debounce } from "obsidian";
 
 export default class ReleaseNotesCloserPlugin extends Plugin {
 	private DEBUG = false; // Set to true for debugging
+
+	// Debounced version to avoid excessive checks on rapid events
+	private debouncedClose = debounce(
+		() => this.closeReleaseNotesLeaves(),
+		100,
+		true
+	);
 
 	async onload() {
 		if (this.DEBUG) console.log("Release Notes Closer plugin loaded");
@@ -14,14 +21,14 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 		// Listen for new leaves being created
 		this.registerEvent(
 			this.app.workspace.on("layout-change", () => {
-				this.closeReleaseNotesLeaves();
+				this.debouncedClose();
 			})
 		);
 
 		// Also check when active leaf changes
 		this.registerEvent(
 			this.app.workspace.on("active-leaf-change", () => {
-				this.closeReleaseNotesLeaves();
+				this.debouncedClose();
 			})
 		);
 	}
@@ -80,7 +87,7 @@ export default class ReleaseNotesCloserPlugin extends Plugin {
 			return false;
 		} catch (e) {
 			// If we encounter any error checking a leaf, just skip it
-			console.error("Error checking leaf:", e);
+			if (this.DEBUG) console.error("Error checking leaf:", e);
 			return false;
 		}
 	}
